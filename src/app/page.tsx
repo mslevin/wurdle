@@ -46,6 +46,10 @@ function LetterRow({letters}: {letters: LetterData[]}) {
 }
 
 function processRow(letters: LetterData[]) : LetterData[] {
+  const fullWord = letters.map((data) => data.letter).join('');
+  if (wordList[fullWord]) {
+    throw new Error('That is a real word! WRONG!');
+  }
   return letters.map((data, i) => {
     let status = 'unknown';
     // check to see if the letter is in the word
@@ -63,7 +67,6 @@ function processRow(letters: LetterData[]) : LetterData[] {
       ...data,
       status
     }
-
   })
 }
 
@@ -117,11 +120,16 @@ export default function Home() {
                 if ((letterIndex === NUM_LETTERS) && (board[rowIndex][letterIndex - 1].letter !== '')) {
                   // process row
                   const newBoard = [...board];
-                  let processed = processRow(newBoard[rowIndex]);
-                  newBoard[rowIndex] = processed;
-                  setBoard(newBoard);
-                  setRowIndex(rowIndex+1);
-                  setLetterIndex(0);
+                  try {
+                    let processed = processRow(newBoard[rowIndex]);
+                    newBoard[rowIndex] = processed;
+                    setBoard(newBoard);
+                    setRowIndex(rowIndex+1);
+                    setLetterIndex(0);
+                  }
+                  catch (e) {
+                    alert(e)
+                  }
                 }
               }
               else if (letterIndex < NUM_LETTERS) {

@@ -1,4 +1,4 @@
-const wordList = {
+const wordList: { [key: string]: boolean} = {
 "which": true,
 "there": true,
 "their": true,
