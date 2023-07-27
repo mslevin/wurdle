@@ -77,20 +77,19 @@ export default function Home() {
       return <LetterRow key={i} letters={row}/>
     })
   }
-  console.log(board)
   return (
     <main className="flex min-h-screen flex-col items-center p-24">    
-      <h1>Wurdle</h1>
+      <h1>Wurlde</h1>
       <h3>It&apos;s like Wordle, but slightly misspelled.</h3>
 
       <div className="flex flex-col items-center">
         {generateBoard()}
         <Keyboard
           layout={kbLayout}
+          display={display}
           disableButtonHold={true}
           newLineOnEnter={false}
           onKeyPress={(key) => {
-            console.log(rowIndex, letterIndex, key)
             if (key === BACKSPACE) {
               let newLetterIndex = letterIndex - 1;
               if (newLetterIndex < 0) newLetterIndex = 0;
@@ -130,6 +129,11 @@ const kbLayout = {
   'default': [
     'q w e r t y u i o p',
     'a s d f g h j k l',
-    '{bksp} z x c v b n m {enter}'
+    '{enter} z x c v b n m {bksp}'
   ]
+}
+
+const display = {
+  '{bksp}': '␡',
+  '{enter}': 'Enter'
 }
