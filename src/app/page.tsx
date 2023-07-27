@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-24">    
       <h1>Wurdle</h1>
-      <h3>It's like Wordle, but slightly misspelled.</h3>
+      <h3>It&apos;s like Wordle, but slightly misspelled.</h3>
 
       <div className="flex flex-col items-center">
         {generateBoard()}
